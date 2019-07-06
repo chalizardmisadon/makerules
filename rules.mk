@@ -1,22 +1,20 @@
 # program
-PROG ?= outfile
-VPATH	?= ../
+PROG	?= outfile
 
 # source files
+VPATH	?= ../
 OBJS	?= main
-SRCDIR	?= ../
 
 # declare compiler
 CC		?= gcc
 CFLAGS	?=
 CFLAGS	+= -g
+CFLAGS	+= -Wall
 
-SRC := $(foreach obj, $(OBJS), $(SRCDIR)$(obj).c)
+
 OBJ := $(foreach obj, $(OBJS), $(obj).o)
-INC := $(foreach p, $(VPATH), -I$(p))
 
-$(PROG):
-	$(CC) $(CFLAGS) $(INC) -c $(SRC)
+$(PROG): $(OBJ)
 	$(CC) $(CFLAGS) -o $(PROG) $(OBJ)
 
 
