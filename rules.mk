@@ -1,8 +1,9 @@
 # program
-PROG	?= outfile
+PROGDIR ?= ../
+PROG	?= $(notdir $(realpath $(PROGDIR)))
 
 # source files
-VPATH	?= ../
+VPATH	?= $(PROGDIR)
 OBJS	?= main
 
 # declare compiler
