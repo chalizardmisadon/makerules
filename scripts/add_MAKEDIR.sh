@@ -89,7 +89,7 @@ echo -e "\n" $x{1..20}"=" "\n"
 echo -e Adding to $fileDir..."\r\n"
 comment="# customized makefile template directory"
 path="\$HOME/"$(realpath --relative-to=$HOME\
-	$(realpath $(dirname $(dirname ${BASH_SOURCE[0]}))))
+	$(dirname $(dirname $(realpath ${BASH_SOURCE[0]}))))/mk
 echo -e $clrBlu$comment"\r\n"export MAKEDIR=$path"/""\r\n"$clrRst
 
 
