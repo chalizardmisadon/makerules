@@ -4,16 +4,25 @@
 bashFile=$(basename ${BASH_SOURCE[0]})
 
 # basic UI color
-clrRst="\e[0m"
-clrRed="\e[91m"
-clrGrn="\e[92m"
-clrYel="\e[93m"
-clrOrg="\e[33m"
-clrBlu="\e[94m"
-clrMgt="\e[95m"
-clrBlk="\e[30m"
-bgrGry="\e[47m"
-bgrGrn="\e[48;5;82m"
+clrRst="\e[0m"			# Reset
+clrRed="\e[91m"			# Red
+clrGrn="\e[92m"			# Green
+clrSpr="\e[38;5;45m"	# Spring
+clrSky="\e[38;5;45m"	# Sky
+clrAvo="\e[38;5;106m"	# Avocado
+clrCop="\e[33m"			# Copper
+clrLat="\e[93m"			# Latte
+clrOrg="\e[38;5;214m"	# Orange
+clrSal="\e[38;5;216m"	# Salmon
+clrGdr="\e[38;5;220m"	# Goldenrod
+clrRyl="\e[38;5;221m"	# Royal
+clrPch="\e[38;5;222m"	# Peach
+clrBlu="\e[94m"			# Blue
+clrMgt="\e[38;5;206m"	# Magenta	
+
+clrBlk="\e[30m"			# Black
+bgrGry="\e[47m"			# Grey
+bgrGrn="\e[48;5;82m"	# BG Green
 
 # verbose setting
 # verbose=false
@@ -35,14 +44,16 @@ bgrGrn="\e[48;5;82m"
 # print UI
 if [[ -z $@ ]]; then
 	echo supported source folder templates:
-	echo -e "  "$clrGrn-c$clrRst"   for C"
-	echo -e "  "$clrYel-cpp$clrRst" for C++"
-	echo -e "  "$clrBlu-py$clrRst"  for Python"
+	echo -e "  "$clrGrn-c$clrRst"       for C"
+	echo -e "  "$clrSky-cpp$clrRst"     for C++"
+	echo -e "  "$clrGdr-py[2\|3]$clrRst" for Python [2|3]"
+	echo -e "  "$clrMgt-jl$clrRst"      for Julia"
 	
-	usage="usage: $bashSrc "
-	echo "$usage<template[=folderName]>"
-	# printf " %.0s" $(seq 1 ${#usage})
-	# echo "[-s <symbolic link path>]"
+	usage="usage: $(basename ${BASH_SOURCE[0]})"
+	usgLn=$(seq ${#usage})
+	usgSp=$(printf " %.0s" $usgLn)
+	echo "$usage [-(template)[=folderName]]"
+	echo "$usgSp [-s <symbolic link path>]"
 	exit 0
 fi
 
@@ -74,7 +85,7 @@ do
 	tabPrn=""
 
 	case $tempLng in
-	c | cpp | py)
+	c | cpp | py | jl)
 
 		# check =folderName
 		if [[ $tempDst == "" ]]; then
@@ -82,7 +93,7 @@ do
 		fi
 
 		if [[ ! -d $tempSrc ]]; then
-			echo -e Option $clrYel${arg%%=*}$clrRst\
+			echo -e Option $clrLat${arg%%=*}$clrRst\
 					is missing template $clrRed$tempDir$clrRst!
 			echo -e "$tabSpc"Please create template $clrBlu$tempSrc$clrRst
 			exit 1
@@ -91,7 +102,7 @@ do
 			exit 2
 		else
 			echo -e Creating folder $clrGrn$tempDst$clrRst\
-					from template $clrYel$tempDir$clrRst ...
+					from template $clrLat$tempDir$clrRst ...
 			cp -rf $tempSrc $PWD/$tempDst
 		fi
 	;;
@@ -133,7 +144,7 @@ done
 # then
 # 	if [[ $verbose == true ]]
 # 	then
-# 		echo -e No argument give. Default script directory is $clrYel$fileDir$clrRst"\r\n"
+# 		echo -e No argument give. Default script directory is $clrLat$fileDir$clrRst"\r\n"
 # 	fi
 # elif [[ ! -d $arg ]]
 # then

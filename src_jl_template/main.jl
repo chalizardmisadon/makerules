@@ -1,4 +1,4 @@
 #!/bin/julia
 
-hello = "Hello World"
+hello = "Hello World in Julia"
 println(hello)
