@@ -1,5 +1,3 @@
-// template main.cpp for new project
-
 #include <stdlib.h>
 #include <stdio.h>
 

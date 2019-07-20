@@ -8,9 +8,15 @@ OBJS	?= main
 
 # declare compiler
 CC		?= gcc
+CXX		?= g++
+
+# default compile flags
 CFLAGS	?=
 CFLAGS	+= -g
 CFLAGS	+= -Wall
+
+CXXFLAGS ?=
+CXXFLAGS += $(CFLAGS)
 
 
 OBJ := $(foreach obj, $(OBJS), $(obj).o)
