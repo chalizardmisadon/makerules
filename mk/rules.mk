@@ -1,37 +1,45 @@
-# program
+# ------------------------------------------------
+# Generic makefile
+# ------------------------------------------------
+
+# ----- default project --------------- #
 PROGDIR ?= ../
-PROG	?= $(notdir $(realpath $(PROGDIR)))
+PROG    ?= $(notdir $(realpath $(PROGDIR)))
 
-# source files
-VPATH	?= $(PROGDIR)
-OBJS	?= main
+# ----- default main --------------- #
+VPATH ?= $(PROGDIR)
+OBJS  ?= main
 
-# declare compiler
-CC		?= gcc
-CXX		?= g++
+# ----- compiler binaries --------------- #
+CC  ?= gcc
+CXX ?= g++
 
-# default compile flags
-CFLAGS	?=
-CFLAGS	+= -g
-CFLAGS	+= -Wall
+# ----- build flags --------------- #
+CFLAGS ?=
+CFLAGS += -g
+CFLAGS += -Wall
 
 CXXFLAGS ?=
 CXXFLAGS += $(CFLAGS)
 
-
+# ----- object list --------------- #
 OBJ := $(foreach obj, $(OBJS), $(obj).o)
 
+# ----- build rules --------------- #
 $(PROG): $(OBJ)
 	$(CC) $(CFLAGS) -o $(PROG) $(OBJ)
 
+# ----- PHONY --------------- #
+.PHONY: list clean clean.o m multi
 
-.PHONY: list clean clean.o
+# ----- build rules --------------- #
+m: multi
+multi:
+	$(MAKE) -j$(shell nproc)
 list:
 	@echo build project: $(PROG)
-
 clean:
 	rm -f $(OBJ) $(PROG)
-
 clean.o:
 	rm -f $(OBJ)
 
